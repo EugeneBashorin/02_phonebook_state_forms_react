@@ -1,11 +1,18 @@
+import PropTypes from 'prop-types';
 import React from "react";
+import {ListElement, ListItem, Button} from "./ContactList.styled.jsx"
 
 export const ContactList = ({nameList, onDeleteContact}) => {
     return (
-        <ul>
+        <ListElement>
             {nameList.map( contact => (
-                <li key={contact.id}>{contact.name}: {contact.number} <button type="button" onClick={()=> onDeleteContact(contact.id)}>Delete</button></li>
+                <ListItem key={contact.id}>{contact.name}: {contact.number} <Button type="button" onClick={()=> onDeleteContact(contact.id)}>Delete</Button></ListItem>
             ))}
-        </ul>
+        </ListElement>
     )
+}
+ContactList.propTypes = {
+    key: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.number,
 }

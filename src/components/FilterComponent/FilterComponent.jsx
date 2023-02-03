@@ -1,10 +1,12 @@
+import PropTypes from 'prop-types';
 import React from "react";
+import { LabelEl, InputEl } from './FilterComponent.styled';
 
 export const FilterComponent = ({value, onChange}) => {
     return(        
-        <label>
-            <p>Find contacts by name</p>
-            <input
+        <LabelEl>
+            Find contacts by name
+            <InputEl
             type="text"
             name="filter"
             value={value}
@@ -13,6 +15,10 @@ export const FilterComponent = ({value, onChange}) => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             />
-        </label>
+        </LabelEl>
     )
+}
+
+FilterComponent.propTypes = {
+    value: PropTypes.string,
 }
