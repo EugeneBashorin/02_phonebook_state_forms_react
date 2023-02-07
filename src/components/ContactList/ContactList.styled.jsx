@@ -18,3 +18,9 @@ export const Button = styled.button`
     border-radius: 3px;
     padding: 1px 4px;
 `
+export const BtnWrapper = styled.div`
+    display: flex;
+    width: 110px;
+    alight-item: center;
+    justify-content: space-between;
+`

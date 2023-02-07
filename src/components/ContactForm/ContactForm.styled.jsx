@@ -10,8 +10,17 @@ export const LabelEl = styled.label`
     margin-bottom: 18px;
 `
 
+export const LabelElFavorite = styled.label`
+    display: flex;
+    margin-bottom: 18px;
+`
+
 export const InputEl = styled.input`
     width: 150px;
+`
+export const InputFavorite = styled.input`
+    width: 15px;
+    margin-right: 10px;
 `
 
 export const Button = styled.button`

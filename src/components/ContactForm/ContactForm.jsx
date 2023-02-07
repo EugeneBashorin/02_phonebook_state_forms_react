@@ -1,15 +1,20 @@
 import PropTypes from 'prop-types';
 import React, {Component} from "react";
-import {LabelEl, Form, InputEl, Button} from "./ContactForm.styled.jsx"
+import {LabelEl, LabelElFavorite, Form, InputEl, InputFavorite, Button} from "./ContactForm.styled.jsx"
 
 export class ContactForm extends Component {
     state = {
         name: "",
         number:"",
+        favorites: false,
     }
 
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value})
+    }
+
+    handleFavoritesChange = event => {
+        this.setState({favorites: event.target.checked})
     }
 
     handleSubmit = event => {
@@ -19,7 +24,7 @@ export class ContactForm extends Component {
     }
 
     reset = () => {
-        this.setState({name: "", number:""})
+        this.setState({name: "", number:"", favorites: false,})
     }
 
     render(){
@@ -51,6 +56,14 @@ export class ContactForm extends Component {
                                 required
                                 />
                         </LabelEl>
+                        <LabelElFavorite>
+                            <InputFavorite 
+                                type="checkbox"
+                                name="favorites"
+                                checked={this.state.favorites}
+                                onChange={this.handleFavoritesChange}
+                            /> Add to favorites
+                        </LabelElFavorite>
                         <Button type="submit">Add contact</Button>
                     </fieldset>
                 </Form>

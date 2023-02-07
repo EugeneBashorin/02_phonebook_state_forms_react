@@ -7,8 +7,9 @@ import { nanoid } from 'nanoid';
 import {SectionBlock} from "./App.styled.jsx"
 
 const INITIAL_STATE = {
-  contacts: [],
+  contacts: [ ],
   filter:"",
+  favorites: false,
 }
 
 export class App extends Component {
@@ -18,7 +19,7 @@ export class App extends Component {
     if(!this.state.contacts.find(contact => contact.name.toLowerCase() === data.name.toLowerCase())){
       this.setState(prevState =>{
         return{
-          contacts: [{id: nanoid(), name: data.name, number: data.number}, ...prevState.contacts]
+          contacts: [{id: nanoid(), name: data.name, number: data.number, favorites: data.favorites}, ...prevState.contacts]
         }
       }) 
     }else{
@@ -28,7 +29,10 @@ export class App extends Component {
   }
 
   changeFilter = event => {
-    this.setState( {filter: event.target.value})
+    this.setState( 
+      event.target.name === "favorites" ? {favorites: event.currentTarget.checked}
+      : {filter: event.currentTarget.value}
+      )
   }
 
   deleteContact = idContact => {
@@ -39,10 +43,20 @@ export class App extends Component {
       }
     )
   }
+  unFavorite = (idContact, boolState) => {
+    this.setState(prevState =>{
+      return{
+        contact: prevState.contacts.map(contact => {if(contact.id === idContact) contact.favorites = !boolState})
+      }
+    })
+
+  }
 
   render (){
     const normalizeFilter = this.state.filter.toLowerCase();
-    const filteredData = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter));
+    const filteredData = this.state.favorites===false ? 
+                         this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter))
+                          : this.state.contacts.filter(contact => contact.favorites === true && contact.name.toLowerCase().includes(normalizeFilter));
     return (
       <>
         <SectionBlock>
@@ -51,8 +65,8 @@ export class App extends Component {
         </SectionBlock>
         <SectionBlock>
         <h2>Contacts</h2>
-        <FilterComponent value={this.state.filter} onChange={this.changeFilter}/>
-        <ContactList nameList={filteredData} onDeleteContact={this.deleteContact}/>
+        <FilterComponent value={this.state.filter} checked={this.state.favorites} onChange={this.changeFilter}/>
+        <ContactList nameList={filteredData} onDeleteContact={this.deleteContact} unFavorContact={this.unFavorite}/>
         </SectionBlock>
       </>
     )
