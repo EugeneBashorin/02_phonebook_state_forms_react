@@ -19,7 +19,7 @@ export class App extends Component {
     if(!this.state.contacts.find(contact => contact.name.toLowerCase() === data.name.toLowerCase())){
       this.setState(prevState =>{
         return{
-          contacts: [{id: nanoid(), name: data.name, number: data.number, favorites: data.favorites}, ...prevState.contacts]
+          contacts: [{id: nanoid(), name: data.name, phoneNumber: data.phoneNumber, favorites: data.favorites}, ...prevState.contacts]
         }
       }) 
     }else{
@@ -61,7 +61,7 @@ export class App extends Component {
       <>
         <SectionBlock>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler}/>
+        <ContactForm onSubmitProps={this.formSubmitHandler}/>
         </SectionBlock>
         <SectionBlock>
         <h2>Contacts</h2>

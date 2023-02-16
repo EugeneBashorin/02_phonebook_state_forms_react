@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Form = styled.form`
+export const FormTag = styled.form`
     width: 350px;
 `
 

@@ -9,7 +9,7 @@ export const ContactList = ({nameList, onDeleteContact, unFavorContact}) => {
         <ListElement>
             {nameList.map( contact => (
                 <ListItem key={contact.id}>
-                    {contact.name}: {contact.number} 
+                    {contact.name}: {contact.phoneNumber} 
                     <BtnWrapper>
                         {contact.favorites===true?<FvrSvgRed/>:<FvrSvgWht/>}
                         <input type="checkbox" checked={contact.favorites} onChange={() => unFavorContact(contact.id, contact.favorites)}/>
@@ -24,5 +24,5 @@ export const ContactList = ({nameList, onDeleteContact, unFavorContact}) => {
 ContactList.propTypes = {
     key: PropTypes.string,
     name: PropTypes.string,
-    number: PropTypes.number,
+    phoneNumber: PropTypes.number,
 }
