@@ -1,10 +1,22 @@
+import styled from "@emotion/styled";
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React from "react";
-import {LabelEl, LabelElFavorite, FormTag, InputEl, InputFavorite, Button} from "./ContactForm.styled.jsx"
+import {LabelEl, LabelElFavorite, Button} from "./ContactForm.styled.jsx"
 import * as Yup from 'yup';
 
-const nameMaches = "/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/";
+const Input = styled(Field)`
+    width: 150px;
+`
+
+const InputCheckBox = styled(Field)`
+    width: 15px;
+    margin-right: 10px;
+`
+const FormTag = styled(Form)`
+    width: 350px;
+`
+
 const nameErrorMessage = "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan";
 const phoneErrorMessage = "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +";
 
@@ -41,25 +53,25 @@ export const ContactForm = ({onSubmitProps}) => {
                 onSubmit={handleSubmit}
             >   
         {({values, handleChange})  =>  
-             (<Form> 
+            (<FormTag> 
                 <fieldset>
                     <LabelEl>
                         Name
-                        <Field type="text" name="name" value={values.name} onChange={handleChange}/>
+                        <Input type="text" name="name" value={values.name} onChange={handleChange}/>
                         <ErrorMessage component="div" name="name"/>
                     </LabelEl>
                     <LabelEl>
                         Number
-                        <Field type="tel" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
+                        <Input type="tel" name="phoneNumber" value={values.phoneNumber} onChange={handleChange} />
                             <ErrorMessage component="div" name="phoneNumber"/>
                     </LabelEl>
 
                     <LabelElFavorite>
-                        <Field type="checkbox" name="favorites"/> Add to favorites
+                        <InputCheckBox type="checkbox" name="favorites"/> Add to favorites
                     </LabelElFavorite>
                     <Button type="submit">Add contact</Button> 
                 </fieldset>
-            </Form>)}
+            </FormTag>)}
         </Formik>
     </>
     )
